@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+// 모든 프로젝트에 적용.
+allprojects{
+	group = 'com.example'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '17'
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+// 서브 프로젝트 전체에 적용.
+subprojects{
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	// 공통적으로 사용하는 dependencies
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		implementation 'com.auth0:java-jwt:4.0.0'
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+}
+
+// 서브 프로젝트 개별 설정
+// 이곳에서 lombok 같은 dependency 를 추가 할 수 있으나
+// 해당 모듈 내에서도 추가 할 수 있기때문에 프로젝트간의 관계만 명시하도록 하자.
+project(':webclient') {
+	dependencies {
+		implementation project(':core')
+	}
+}
+project(':core') {
+	dependencies {
+		implementation project(':infra')
+	}
+}
+project(':infra') {
+	dependencies {
+	}
+}
