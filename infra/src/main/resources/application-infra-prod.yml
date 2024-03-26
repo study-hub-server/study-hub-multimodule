@@ -1,7 +1,7 @@
 spring:
   data:
     redis:
-      host: localhost
+      host: studyhub-redis-cluster.4oxtwa.clustercfg.apn2.cache.amazonaws.com
       port: 6379
 
 cloud:
