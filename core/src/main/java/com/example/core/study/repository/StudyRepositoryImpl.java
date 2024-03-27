@@ -195,7 +195,7 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
 
     @Override
     public List<StudyApplyDaoByUserId> findApplyByUserId(Long userId) {
-        String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce " +
+        String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce, sa.reject_reason " +
                 "FROM study AS s INNER JOIN study_apply as sa ON s.study_id = sa.study_id " +
                 "WHERE sa.user_id = ?1";
 
@@ -206,12 +206,12 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
     }
 
     @Override
-    public boolean findApplyByStudyIdAndUserId(Long studyId, Long userId) {
+    public boolean validateApplyByStudyIdAndUserId(Long studyId, Long userId) {
         if(userId == null) {
             return false;
         }
 
-        String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce " +
+        String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce, sa.reject_reason" +
                 "FROM study AS s INNER JOIN study_apply as sa ON s.study_id = sa.study_id " +
                 "WHERE s.study_id = ?1 AND sa.user_id = ?2";
 
@@ -220,5 +220,17 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
         query.setParameter(2, userId);
 
         return !query.getResultList().isEmpty();
+    }
+
+    @Override
+    public StudyApplyDaoByUserId findApplyByStudyIdAndUserId(Long studyId, Long userId) {
+        String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce, sa.reject_reason " +
+                "FROM study AS s INNER JOIN study_apply as sa ON s.study_id = sa.study_id " +
+                "WHERE sa.user_id = ?1";
+
+        Query query = em.createNativeQuery(sql, "StudyApplyDaoByUserIdMapping");
+        query.setParameter(1, userId);
+
+        return (StudyApplyDaoByUserId) query.getResultList().get(0);
     }
 }

@@ -8,6 +8,7 @@ import com.example.core.study.dto.data.AcceptApplyData;
 import com.example.core.study.dto.data.EnrollApplyData;
 import com.example.core.study.dto.data.RejectApplyData;
 import com.example.core.study.dto.response.FindMyApplyResponse;
+import com.example.core.study.dto.response.RejectReasonResponse;
 import com.example.core.study.repository.StudyRepository;
 import com.example.core.user.service.UserValidater;
 import lombok.RequiredArgsConstructor;
@@ -63,5 +64,12 @@ public class StudyApplyService {
         userValidater.validateExistUserId(userId);
         Slice<StudyApplyDaoByUserId> applyDao = Converter.toSlice(PageRequest.of(page, size), studyRepository.findApplyByUserId(userId));
         return new FindMyApplyResponse(5L, applyDao);
+    }
+
+    public RejectReasonResponse findRejectReason(Long userId, Long studyId) {
+        userValidater.validateExistUserId(userId);
+        studyValidator.validateStudyExist(studyId);
+        StudyApplyDaoByUserId studyApplyDaoByUserId = studyRepository.findApplyByStudyIdAndUserId(studyId, userId);
+        return new RejectReasonResponse(studyApplyDaoByUserId);
     }
 }

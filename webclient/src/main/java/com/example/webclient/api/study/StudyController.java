@@ -37,11 +37,11 @@ public class StudyController {
         return ResponseEntity.ok().body(userId.getId());
     }
 
-//    @Operation(summary = "스터디 참여 신청 거절 사유 조회", description = "JWT와 studyId를 보내주세요.")
-//    @GetMapping("/v1/reject")
-//    public ResponseEntity<RejectReasonResponse> enrollStudy(UserId userId, @RequestParam Long studyId) {
-//        return ResponseEntity.ok(studyApplyService.findRejectReason(userId, studyId));
-//    }
+    @Operation(summary = "스터디 참여 신청 거절 사유 조회", description = "JWT와 studyId를 보내주세요.")
+    @GetMapping("/v1/reject")
+    public ResponseEntity<RejectReasonResponse> enrollStudy(UserId userId, @RequestParam Long studyId) {
+        return ResponseEntity.ok(studyApplyService.findRejectReason(userId.getId(), studyId));
+    }
 
     @Operation(summary = "스터디 참여 신청 수락", description = "JWT 헤더에 보내주시면 됩니다!")
     @PutMapping("/v1/study-accept")

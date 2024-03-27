@@ -2,17 +2,13 @@ package com.example.core.study.repository;
 
 import com.example.core.common.enums.MajorType;
 import com.example.core.study.dao.*;
-import com.example.core.study.domain.StudyApply;
 import com.example.core.study.dto.data.InquiryData;
-import com.example.core.study.dto.data.StudyDataByMajor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface StudyRepositoryCustom {
-
     List<StudyDaoByInquiry> findByInquiry(InquiryData data, Pageable pageable, Long userId);
 
     List<StudyDaoByBookmark> findPostsByBookmarked(Long userId, Pageable pageable);
@@ -27,5 +23,7 @@ public interface StudyRepositoryCustom {
 
     List<StudyApplyDaoByUserId> findApplyByUserId(Long userId);
 
-    boolean findApplyByStudyIdAndUserId(Long studyId, Long userId);
+    boolean validateApplyByStudyIdAndUserId(Long studyId, Long userId);
+
+    StudyApplyDaoByUserId findApplyByStudyIdAndUserId(Long studyId, Long userId);
 }

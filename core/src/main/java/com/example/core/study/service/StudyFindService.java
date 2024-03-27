@@ -54,7 +54,7 @@ public class StudyFindService {
 
     public FindStudyResponseById findStudyById(Long studyId, Long userId) {
         StudyDaoInfo dao = studyRepository.findStudyById(studyId, userId).orElseThrow(RuntimeException::new);
-        boolean isApply = studyRepository.findApplyByStudyIdAndUserId(studyId, userId);
+        boolean isApply = studyRepository.validateApplyByStudyIdAndUserId(studyId, userId);
 
         return new FindStudyResponseById(dao, getRelatedStudy(dao.getMajor(), studyId), isApply);
     }

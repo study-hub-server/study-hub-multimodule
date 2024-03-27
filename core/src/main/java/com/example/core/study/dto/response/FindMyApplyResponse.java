@@ -1,6 +1,5 @@
 package com.example.core.study.dto.response;
 
-import com.example.core.common.util.Converter;
 import com.example.core.study.dao.StudyApplyDaoByUserId;
 import com.example.core.study.dto.data.ApplyData;
 import lombok.Getter;
