@@ -3,7 +3,6 @@ package com.example.core.study.domain;
 import com.example.core.common.BaseTimeEntity;
 import com.example.core.common.enums.Inspection;
 import com.example.core.study.dao.StudyApplyDaoByUserId;
-import com.example.core.study.dto.data.EnrollApplyData;
 import com.example.core.study.dto.data.UpdateStudyData;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -23,7 +22,8 @@ import java.util.stream.Collectors;
                         @ColumnResult(name = "study_id", type = Long.class),
                         @ColumnResult(name = "title", type = String.class),
                         @ColumnResult(name = "inspection", type = Inspection.class),
-                        @ColumnResult(name = "introduce", type = String.class)
+                        @ColumnResult(name = "introduce", type = String.class),
+                        @ColumnResult(name = "reject_reason", type = String.class)
                 }
         )
 )

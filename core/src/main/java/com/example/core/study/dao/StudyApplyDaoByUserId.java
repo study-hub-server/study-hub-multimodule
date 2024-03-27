@@ -11,12 +11,14 @@ public class StudyApplyDaoByUserId {
     private final String studyTitle;
     private final Inspection inspection;
     private final String introduce;
+    private final String rejectReason;
 
     @Builder
-    public StudyApplyDaoByUserId(Long studyId, String studyTitle, Inspection inspection, String introduce) {
+    public StudyApplyDaoByUserId(Long studyId, String studyTitle, Inspection inspection, String introduce, String rejectReason) {
         this.studyId = studyId;
         this.studyTitle = studyTitle;
         this.inspection = inspection;
         this.introduce = introduce;
+        this.rejectReason = rejectReason;
     }
 }
