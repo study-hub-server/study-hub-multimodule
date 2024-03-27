@@ -3,6 +3,7 @@ package com.example.core.study.dto.response;
 import com.example.core.common.enums.GenderType;
 import com.example.core.common.enums.MajorType;
 import com.example.core.common.enums.StudyWayType;
+import com.example.core.study.dao.StudyDaoByMajor;
 import com.example.core.study.dao.StudyDaoInfo;
 import com.example.core.study.dao.UserDao;
 import com.example.core.study.dto.data.StudyDataByMajor;
@@ -37,9 +38,9 @@ public class FindStudyResponseById {
     private final boolean isClose;
     private final boolean isApply;
     private final UserData masterUser;
-    private final List<StudyDataByMajor> relatedStudies;
+    private final List<StudyDaoByMajor> relatedStudies;
 
-    public FindStudyResponseById(StudyDaoInfo dao, List<StudyDataByMajor> relatedStudies, boolean isApply) {
+    public FindStudyResponseById(StudyDaoInfo dao, List<StudyDaoByMajor> relatedStudies, boolean isApply) {
         this.postId = dao.getPostId();
         this.title = dao.getTitle();
         this.createdDate = dao.getCreatedDate();

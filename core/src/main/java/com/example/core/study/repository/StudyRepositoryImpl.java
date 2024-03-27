@@ -204,4 +204,21 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
 
         return (List<StudyApplyDaoByUserId>) query.getResultList();
     }
+
+    @Override
+    public boolean findApplyByStudyIdAndUserId(Long studyId, Long userId) {
+        if(userId == null) {
+            return false;
+        }
+
+        String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce " +
+                "FROM study AS s INNER JOIN study_apply as sa ON s.study_id = sa.study_id " +
+                "WHERE s.study_id = ?1 AND sa.user_id = ?2";
+
+        Query query = em.createNativeQuery(sql, "StudyApplyDaoByUserIdMapping");
+        query.setParameter(1, studyId);
+        query.setParameter(2, userId);
+
+        return !query.getResultList().isEmpty();
+    }
 }

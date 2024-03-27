@@ -94,12 +94,12 @@ public class StudyController {
         return ResponseEntity.ok().body(findPostResponseByBookmark);
     }
 
-//    @Operation(summary = "스터디 단건 조회", description = "url 끝에 postId를 넣어주세요")
-//    @GetMapping("/v2/study-posts/{postId}")
-//    public ResponseEntity<FindStudyResponseById> findPostById(@PathVariable Long postId, UserId userId) {
-//        FindStudyResponseById findPostResponseById = studyFindService.findStudyById(postId, userId.getId());
-//        return ResponseEntity.ok(findPostResponseById);
-//    }
+    @Operation(summary = "스터디 단건 조회", description = "url 끝에 postId를 넣어주세요")
+    @GetMapping("/v2/study-posts/{postId}")
+    public ResponseEntity<FindStudyResponseById> findPostById(@PathVariable Long postId, UserId userId) {
+        FindStudyResponseById findPostResponseById = studyFindService.findStudyById(postId, userId.getId());
+        return ResponseEntity.ok(findPostResponseById);
+    }
 
     @Operation(summary = "내가 작성한 스터디 조회")
     @GetMapping("/v1/study-posts/mypost")

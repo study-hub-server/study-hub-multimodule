@@ -1,10 +1,9 @@
 package com.example.core.study.service;
 
 import com.example.core.bookmark.service.BookmarkService;
+import com.example.core.common.enums.MajorType;
 import com.example.core.common.util.Converter;
-import com.example.core.study.dao.StudyDaoByBookmark;
-import com.example.core.study.dao.StudyDaoByInquiry;
-import com.example.core.study.dao.StudyDaoByUserId;
+import com.example.core.study.dao.*;
 import com.example.core.study.domain.StudyEntity;
 import com.example.core.study.dto.response.*;
 import com.example.core.study.dto.data.InquiryData;
@@ -18,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -51,16 +52,16 @@ public class StudyFindService {
         return new FindStudyResponseByUserId(totalCount, posts);
     }
 
-//    public FindStudyResponseById findStudyById(Long studyId, Long userId) {
-//        StudyDaoInfo dao = studyRepository.findStudyById(studyId, userId).orElseThrow(RuntimeException::new);
-//        boolean isApply = getUserApply(userId, postData);
-//
-//        return new FindStudyResponseById(dao, getRelatedStudy(dao.getMajor(), studyId), isApply);
-//    }
-//
-//    public FindStudyResponseByMajor getRelatedStudy(MajorType major, Long exceptPostId) {
-//        return studyRepository.findByMajor(major, exceptPostId);
-//    }
+    public FindStudyResponseById findStudyById(Long studyId, Long userId) {
+        StudyDaoInfo dao = studyRepository.findStudyById(studyId, userId).orElseThrow(RuntimeException::new);
+        boolean isApply = studyRepository.findApplyByStudyIdAndUserId(studyId, userId);
+
+        return new FindStudyResponseById(dao, getRelatedStudy(dao.getMajor(), studyId), isApply);
+    }
+
+    public List<StudyDaoByMajor> getRelatedStudy(MajorType major, Long exceptPostId) {
+        return studyRepository.findByMajor(major, exceptPostId);
+    }
 
     public StudyEntity findStudy(Long postId) {
         return studyRepository.findById(postId).orElseThrow(RuntimeException::new);

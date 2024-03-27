@@ -27,4 +27,5 @@ public interface StudyRepositoryCustom {
 
     List<StudyApplyDaoByUserId> findApplyByUserId(Long userId);
 
+    boolean findApplyByStudyIdAndUserId(Long studyId, Long userId);
 }
