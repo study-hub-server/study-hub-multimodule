@@ -226,11 +226,24 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
     public StudyApplyDaoByUserId findApplyByStudyIdAndUserId(Long studyId, Long userId) {
         String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce, sa.reject_reason " +
                 "FROM study AS s INNER JOIN study_apply as sa ON s.study_id = sa.study_id " +
-                "WHERE sa.user_id = ?1";
+                "WHERE sa.user_id = ?1 AND s.study_id = ?2";
 
         Query query = em.createNativeQuery(sql, "StudyApplyDaoByUserIdMapping");
         query.setParameter(1, userId);
+        query.setParameter(2, studyId);
 
         return (StudyApplyDaoByUserId) query.getResultList().get(0);
+    }
+
+    @Override
+    public List<ParticipateStudyDaoByUserId> findAcceptApplyByUserId(Long userId) {
+        String sql = "SELECT s.study_id, s.title, sa.inspection, sa.introduce, sa.reject_reason " +
+                "FROM study AS s INNER JOIN study_apply as sa ON s.study_id = sa.study_id " +
+                "WHERE sa.user_id = ?1 AND sa.inspection = 'ACCEPT'";
+
+        Query query = em.createNativeQuery(sql, "ParticipateStudyDaoByUserIdMapping");
+        query.setParameter(1, userId);
+
+        return (List<ParticipateStudyDaoByUserId>) query.getResultList();
     }
 }

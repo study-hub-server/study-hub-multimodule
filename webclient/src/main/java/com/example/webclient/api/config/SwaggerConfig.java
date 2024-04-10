@@ -2,6 +2,7 @@ package com.example.webclient.api.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -15,7 +16,11 @@ import java.util.Arrays;
 @OpenAPIDefinition(
         info = @Info(title = "StudyHub",
                 description = "StudyHub api 명세",
-                version = "v1"))
+                version = "v1"),
+        /**
+         * local에서 사용하실때는 아래 조건을 삭제해주세요
+        */
+        servers = {@Server(url = "https://study-hub.site", description = "Default Server URL")})
 @RequiredArgsConstructor
 @Configuration
 public class SwaggerConfig {

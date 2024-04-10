@@ -122,10 +122,16 @@ public class StudyController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "내가쓴 게시글 전체 삭제", description = "헤더에 userId 보내주시면 됩니다.")
+    @Operation(summary = "회원이 작성한 게시글 전체 삭제", description = "헤더에 userId 보내주시면 됩니다.")
     @DeleteMapping("/v1/all/study-post")
     public ResponseEntity<HttpStatus> deleteAllPosts(final UserId userId) {
         studyService.deleteAllStudyByUserId(userId.getId());
         return ResponseEntity.ok().build();
     }
+
+//    @Operation(summary = "내가 참여한 스터디 목록", description = "헤더에 JWT 보내주시면 됩니다.")
+//    @GetMapping("/v1/participated-study")
+//    public ResponseEntity<FindParticipateStudyResponse> getParticipateApply(UserId userId, @RequestParam int page, @RequestParam int size) {
+//        return ResponseEntity.ok().body(studyApplyService.getParticipateStudy(userId.getId(), page, size));
+//    }
 }

@@ -2,6 +2,7 @@ package com.example.core.study.domain;
 
 import com.example.core.common.BaseTimeEntity;
 import com.example.core.common.enums.Inspection;
+import com.example.core.study.dao.ParticipateStudyDaoByUserId;
 import com.example.core.study.dao.StudyApplyDaoByUserId;
 import com.example.core.study.dto.data.UpdateStudyData;
 import jakarta.persistence.*;
@@ -14,6 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@SqlResultSetMapping(
+        name = "ParticipateStudyDaoByUserIdMapping",
+        classes = @ConstructorResult(
+                targetClass = ParticipateStudyDaoByUserId.class,
+                columns = {
+                        @ColumnResult(name = "major", type = String.class),
+                        @ColumnResult(name = "title", type = String.class),
+                        @ColumnResult(name = "content", type = String.class),
+                        @ColumnResult(name = "chatUrl", type = String.class),
+                        @ColumnResult(name = "inspection", type = String.class),
+                        @ColumnResult(name = "post_id", type = Long.class),
+                        @ColumnResult(name = "study_id", type = Long.class)
+                }
+        )
+)
 @SqlResultSetMapping(
         name = "StudyApplyDaoByUserIdMapping",
         classes = @ConstructorResult(

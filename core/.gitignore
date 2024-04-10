@@ -5,6 +5,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+application-core-dev.yml
+
 ### STS ###
 .apt_generated
 .classpath
@@ -25,7 +27,6 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

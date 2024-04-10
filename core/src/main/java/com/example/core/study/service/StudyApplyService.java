@@ -8,11 +8,15 @@ import com.example.core.study.dto.data.AcceptApplyData;
 import com.example.core.study.dto.data.EnrollApplyData;
 import com.example.core.study.dto.data.RejectApplyData;
 import com.example.core.study.dto.response.FindMyApplyResponse;
+import com.example.core.study.dto.response.FindParticipateStudyResponse;
 import com.example.core.study.dto.response.RejectReasonResponse;
 import com.example.core.study.repository.StudyRepository;
+import com.example.core.user.domain.UserEntity;
+import com.example.core.user.service.UserFinder;
 import com.example.core.user.service.UserValidater;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +32,7 @@ public class StudyApplyService {
     private final StudyRepository studyRepository;
     private final StudyValidator studyValidator;
     private final UserValidater userValidater;
+    private final UserFinder userFinder;
 
     public void enroll(EnrollApplyData data, Long userId) {
         userValidater.validateExistUserId(userId);
@@ -72,4 +77,10 @@ public class StudyApplyService {
         StudyApplyDaoByUserId studyApplyDaoByUserId = studyRepository.findApplyByStudyIdAndUserId(studyId, userId);
         return new RejectReasonResponse(studyApplyDaoByUserId);
     }
+
+//    public FindParticipateStudyResponse getParticipateStudy(Long userId, int page, int size) {
+//        UserEntity user = userFinder.getUserById(userId);
+//        Pageable pageable = PageRequest.of(page, size);
+//
+//    }
 }

@@ -26,4 +26,6 @@ public interface StudyRepositoryCustom {
     boolean validateApplyByStudyIdAndUserId(Long studyId, Long userId);
 
     StudyApplyDaoByUserId findApplyByStudyIdAndUserId(Long studyId, Long userId);
+
+    List<ParticipateStudyDaoByUserId> findAcceptApplyByUserId(Long userId);
 }

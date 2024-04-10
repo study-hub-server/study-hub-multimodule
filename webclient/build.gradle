@@ -1,9 +1,9 @@
 // 아래 두 설정은 서버가 아니고 class 파일만 있을 경우 작성
 bootJar {
-	enabled = false
+	enabled = true
 }
 jar {
-	enabled = true
+	enabled = false
 }
 
 // 해당 모듈에서만 사용할 의존성 추가
@@ -11,6 +11,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 	implementation 'io.micrometer:micrometer-core'
 }
