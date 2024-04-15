@@ -90,7 +90,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "회원 사진 저장", description = "Http 헤더에 JWT를 보내주세요.")
+    @Operation(summary = "회원 사진 저장", description = "Http 헤더에 JWT를 보내주세요")
     @PutMapping("/v1/users/image")
     public ResponseEntity<HttpStatus> uploadImage(UserId userId, @RequestPart(name = "image", required = false) MultipartFile image) throws IOException {
         userService.uploadUserImage(userId.getId() ,image);
