@@ -17,10 +17,8 @@ import java.util.Arrays;
         info = @Info(title = "StudyHub",
                 description = "StudyHub api 명세",
                 version = "v1"),
-        /**
-         * local에서 사용하실때는 아래 조건을 삭제해주세요
-        */
-        servers = {@Server(url = "https://study-hub.site", description = "Default Server URL")})
+        servers = {@Server(url = "https://study-hub.site", description = "Default Server URL"),
+                @Server(url = "/", description = "Default Server URL")})
 @RequiredArgsConstructor
 @Configuration
 public class SwaggerConfig {
